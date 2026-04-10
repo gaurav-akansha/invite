@@ -2473,7 +2473,8 @@ footer { background: var(--dark); color: white; text-align: center; padding: 70p
   <div class="footer-devanagari">🙏 शुभ विवाह 🙏</div>
   <div class="footer-bottom">&copy; 2026 Gaurav &amp; Akansha. Crafted with ♥ for the most beautiful day.</div>
 </footer>
-
+<!-- ════ Floating music ════ -->
+<div class="music-float" onclick="toggleMusic()" title="Toggle ambient music"><span id="musicFloatIcon">🎵</span></div>
 
 <!-- ════ SCRIPTS ════ -->
 <script>
@@ -2904,6 +2905,7 @@ function toggleMusic(){
   playing=!playing;
   document.getElementById('musicIcon').textContent=playing?'♫':'♪';
   document.getElementById('musicLabel').textContent=playing?'Playing':'Music';
+  document.getElementById('musicFloatIcon').textContent=playing?'🔇':'🎵';
   playing?aud.play().catch(()=>{}):aud.pause();
 }
 
