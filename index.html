@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gaurav & Akansha Wedding | 19 June 2026</title>
 <meta name="description" content="To our friends and family: We're so excited to celebrate our wedding with you. Find all the details you need to know about our big day here.">
-<meta property="og:image" content="https://raw.githubusercontent.com/gaurav-akansha/invite/refs/heads/main/wedding-invite.png" />
-<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/gaurav-akansha/invite/refs/heads/main/wedding-invite.png" />
+<meta property="og:image" content="https://raw.githubusercontent.com/gaurav-akansha/invite/2e1e52c70fe4260986cae34d4fb05fe3cdf5b50d/preview-image.png" />
+<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/gaurav-akansha/invite/2e1e52c70fe4260986cae34d4fb05fe3cdf5b50d/preview-image.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -1643,6 +1643,104 @@ footer { background: var(--dark); color: white; text-align: center; padding: 70p
   .form-group.full { grid-column: span 1; }
   footer { padding: 54px 20px 26px; }
 }
+
+/* ══════════════════════════════════════════
+   ADD TO CALENDAR — DROPDOWN
+══════════════════════════════════════════ */
+.cal-btn-wrap {
+  position: relative;
+  margin-top: 14px;
+}
+.cal-trigger {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1.5px solid var(--champagne);
+  border-radius: 30px;
+  color: var(--champagne);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+}
+.cal-trigger:hover {
+  background: var(--champagne);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(201,168,76,0.32);
+}
+.cal-trigger svg { width: 13px; height: 13px; flex-shrink: 0; fill: currentColor; }
+.cal-trigger .cal-arrow {
+  margin-left: auto;
+  font-size: 0.65rem;
+  transition: transform 0.22s;
+}
+.cal-btn-wrap.open .cal-arrow { transform: rotate(180deg); }
+
+.cal-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0; right: 0;
+  background: #fffdf8;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(44,36,22,0.13);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 200;
+}
+.cal-btn-wrap.open .cal-dropdown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+.cal-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.cal-option:last-child { border-bottom: none; }
+.cal-option:hover { background: var(--champagne-pale); color: var(--dark); }
+.cal-option img { width: 16px; height: 16px; object-fit: contain; }
+.cal-option-icon { font-size: 1rem; }
+
+/* Master "Save All Events" button */
+.cal-master-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+.cal-master-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 32px;
+  background: var(--gold-gradient);
+  border: none;
+  border-radius: 40px;
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-transform: uppercase;
+}
+.cal-master-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201,168,76,0.42);
+}
+.cal-master-btn svg { width: 16px; height: 16px; fill: var(--dark); flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -2102,6 +2200,27 @@ footer { background: var(--dark); color: white; text-align: center; padding: 70p
           <div class="event-detail"><span class="event-detail-icon">🕗</span><span>8:00 PM onwards</span></div>
           <div class="event-detail"><span class="event-detail-icon">📍</span><span>Moga Punjabi, Gajraula</span></div>
           <span class="event-tag">Traditional/Cocktail Attire</span>
+          <div class="cal-btn-wrap" id="cal-wrap-1">
+            <button class="cal-trigger" onclick="toggleCalDropdown('cal-wrap-1')">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              Add to Calendar
+              <span class="cal-arrow">▼</span>
+            </button>
+            <div class="cal-dropdown">
+              <a class="cal-option" href="#" onclick="addToGoogle('Gaurav & Akansha Wedding — Mehendi & Sangeet','20260618T200000','20260618T230000','Moga Punjabi Tadka, Gajraula, Amroha District, Uttar Pradesh','Join us for Mehendi & Sangeet — an evening of colour, music and celebration. Traditional/Cocktail Attire.');return false;">
+                <span class="cal-option-icon">📅</span> Google Calendar
+              </a>
+              <a class="cal-option" href="#" onclick="addToOutlook('Gaurav & Akansha Wedding — Mehendi & Sangeet','20260618T200000','20260618T230000','Moga Punjabi Tadka, Gajraula, Amroha District, Uttar Pradesh','Join us for Mehendi & Sangeet — an evening of colour, music and celebration. Traditional/Cocktail Attire.');return false;">
+                <span class="cal-option-icon">📆</span> Outlook / Office 365
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha Wedding — Mehendi & Sangeet','20260618T143000Z','20260618T173000Z','Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh','Join us for Mehendi & Sangeet — an evening of colour, music and celebration. Traditional/Cocktail Attire.','mehendi-sangeet');return false;">
+                <span class="cal-option-icon">🍎</span> Apple Calendar (.ics)
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha Wedding — Mehendi & Sangeet','20260618T143000Z','20260618T173000Z','Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh','Join us for Mehendi & Sangeet — an evening of colour, music and celebration. Traditional/Cocktail Attire.','mehendi-sangeet');return false;">
+                <span class="cal-option-icon">📥</span> Download .ics file
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2116,6 +2235,27 @@ footer { background: var(--dark); color: white; text-align: center; padding: 70p
           <div class="event-detail"><span class="event-detail-icon">🕘</span><span>9:00 AM onwards</span></div>
           <div class="event-detail"><span class="event-detail-icon">📍</span><span>Moga Punjabi, Gajraula</span></div>
           <span class="event-tag">Traditional / Old Clothes</span>
+          <div class="cal-btn-wrap" id="cal-wrap-2">
+            <button class="cal-trigger" onclick="toggleCalDropdown('cal-wrap-2')">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              Add to Calendar
+              <span class="cal-arrow">▼</span>
+            </button>
+            <div class="cal-dropdown">
+              <a class="cal-option" href="#" onclick="addToGoogle('Gaurav & Akansha Wedding — Haldi','20260619T090000','20260619T120000','Moga Punjabi Tadka, Gajraula, Amroha District, Uttar Pradesh','Join us for the joyful Haldi ceremony. Traditional attire / old clothes recommended — it gets colourful!');return false;">
+                <span class="cal-option-icon">📅</span> Google Calendar
+              </a>
+              <a class="cal-option" href="#" onclick="addToOutlook('Gaurav & Akansha Wedding — Haldi','20260619T090000','20260619T120000','Moga Punjabi Tadka, Gajraula, Amroha District, Uttar Pradesh','Join us for the joyful Haldi ceremony. Traditional attire / old clothes recommended — it gets colourful!');return false;">
+                <span class="cal-option-icon">📆</span> Outlook / Office 365
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha Wedding — Haldi','20260619T033000Z','20260619T063000Z','Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh','Join us for the joyful Haldi ceremony. Traditional attire / old clothes recommended — it gets colourful!','haldi');return false;">
+                <span class="cal-option-icon">🍎</span> Apple Calendar (.ics)
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha Wedding — Haldi','20260619T033000Z','20260619T063000Z','Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh','Join us for the joyful Haldi ceremony. Traditional attire / old clothes recommended — it gets colourful!','haldi');return false;">
+                <span class="cal-option-icon">📥</span> Download .ics file
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2130,8 +2270,37 @@ footer { background: var(--dark); color: white; text-align: center; padding: 70p
           <div class="event-detail"><span class="event-detail-icon">🕗</span><span>8:00 PM — Auspicious Muhurat</span></div>
           <div class="event-detail"><span class="event-detail-icon">📍</span><span>Highway Resort, Gajraula, Uttar Pradesh</span></div>
           <span class="event-tag event-tag-main">Traditional Attire ✦ Main Ceremony</span>
+          <div class="cal-btn-wrap" id="cal-wrap-3">
+            <button class="cal-trigger" onclick="toggleCalDropdown('cal-wrap-3')">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              Add to Calendar
+              <span class="cal-arrow">▼</span>
+            </button>
+            <div class="cal-dropdown">
+              <a class="cal-option" href="#" onclick="addToGoogle('Gaurav & Akansha — Wedding Ceremony 💍','20260619T200000','20260620T010000','Highway Resort\\, NH-9\\, Gajraula\\, Amroha District\\, Uttar Pradesh','The main wedding ceremony at the auspicious muhurat. Dress code: Traditional Indian Attire. Highway Resort, NH-9, Gajraula — ~110 km from Delhi.');return false;">
+                <span class="cal-option-icon">📅</span> Google Calendar
+              </a>
+              <a class="cal-option" href="#" onclick="addToOutlook('Gaurav & Akansha — Wedding Ceremony 💍','20260619T200000','20260620T010000','Highway Resort, NH-9, Gajraula, Amroha District, Uttar Pradesh','The main wedding ceremony at the auspicious muhurat. Dress code: Traditional Indian Attire. Highway Resort, NH-9, Gajraula — ~110 km from Delhi.');return false;">
+                <span class="cal-option-icon">📆</span> Outlook / Office 365
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha — Wedding Ceremony','20260619T143000Z','20260619T193000Z','Highway Resort\\, NH-9\\, Gajraula\\, Amroha District\\, Uttar Pradesh','The main wedding ceremony at the auspicious muhurat. Dress code: Traditional Indian Attire. Highway Resort\\, NH-9\\, Gajraula — ~110 km from Delhi.','wedding-ceremony');return false;">
+                <span class="cal-option-icon">🍎</span> Apple Calendar (.ics)
+              </a>
+              <a class="cal-option" href="#" onclick="downloadICS('Gaurav & Akansha — Wedding Ceremony','20260619T143000Z','20260619T193000Z','Highway Resort\\, NH-9\\, Gajraula\\, Amroha District\\, Uttar Pradesh','The main wedding ceremony at the auspicious muhurat. Dress code: Traditional Indian Attire. Highway Resort\\, NH-9\\, Gajraula — ~110 km from Delhi.','wedding-ceremony');return false;">
+                <span class="cal-option-icon">📥</span> Download .ics file
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Master Save All Events -->
+    <div class="cal-master-wrap fade-in">
+      <button class="cal-master-btn" onclick="downloadAllICS()">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h-2v2H8v2h2v2h2v-2h2v-2h-2z"/></svg>
+        Save All 3 Events to Calendar
+      </button>
     </div>
 
     <!-- Dress Code Accent -->
@@ -2962,6 +3131,138 @@ function launchConfetti(){
     document.body.appendChild(d);
     setTimeout(()=>d.remove(),2800);
   }
+}
+
+/* ══════════════════════════════════════════
+   ADD TO CALENDAR FUNCTIONS
+══════════════════════════════════════════ */
+
+/* Toggle dropdown open/close */
+function toggleCalDropdown(id) {
+  const wrap = document.getElementById(id);
+  const isOpen = wrap.classList.contains('open');
+  // Close all open dropdowns first
+  document.querySelectorAll('.cal-btn-wrap.open').forEach(w => w.classList.remove('open'));
+  if (!isOpen) wrap.classList.add('open');
+}
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.cal-btn-wrap')) {
+    document.querySelectorAll('.cal-btn-wrap.open').forEach(w => w.classList.remove('open'));
+  }
+});
+
+/* Format date for Google Calendar: YYYYMMDDTHHMMSS (local IST) */
+function addToGoogle(title, start, end, location, desc) {
+  const base = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
+  const url = base
+    + '&text=' + encodeURIComponent(title)
+    + '&dates=' + start + '/' + end
+    + '&location=' + encodeURIComponent(location)
+    + '&details=' + encodeURIComponent(desc)
+    + '&ctz=Asia/Kolkata';
+  window.open(url, '_blank');
+}
+
+/* Outlook Web / Office 365 */
+function addToOutlook(title, start, end, location, desc) {
+  // Convert local IST format to ISO for Outlook
+  function toISO(dt) {
+    // dt = 20260618T200000 (IST = UTC+5:30)
+    const y=dt.slice(0,4), mo=dt.slice(4,6), d=dt.slice(6,8);
+    const h=dt.slice(9,11), mi=dt.slice(11,13);
+    return `${y}-${mo}-${d}T${h}:${mi}:00`;
+  }
+  const url = 'https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent'
+    + '&subject=' + encodeURIComponent(title)
+    + '&startdt=' + encodeURIComponent(toISO(start))
+    + '&enddt=' + encodeURIComponent(toISO(end))
+    + '&location=' + encodeURIComponent(location)
+    + '&body=' + encodeURIComponent(desc);
+  window.open(url, '_blank');
+}
+
+/* Generate and download .ics file (Apple Calendar, any calendar app) */
+function downloadICS(title, startUTC, endUTC, location, desc, filename) {
+  const uid = filename + '-gaurav-akansha-2026@wedding';
+  const now = new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Gaurav & Akansha Wedding//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:' + uid,
+    'DTSTAMP:' + now,
+    'DTSTART:' + startUTC,
+    'DTEND:' + endUTC,
+    'SUMMARY:' + title,
+    'LOCATION:' + location,
+    'DESCRIPTION:' + desc + '\\n\\nWebsite: https://gaurav-akansha.netlify.app',
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename + '.ics';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* Download all 3 events in a single .ics file */
+function downloadAllICS() {
+  const now = new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const events = [
+    {
+      uid: 'mehendi-sangeet-gaurav-akansha-2026@wedding',
+      start: '20260618T143000Z',
+      end:   '20260618T173000Z',
+      summary: 'Gaurav & Akansha Wedding — Mehendi & Sangeet',
+      location: 'Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh',
+      desc: 'An evening of colour\\, music and celebration. Traditional/Cocktail Attire.\\nWebsite: https://gaurav-akansha.netlify.app'
+    },
+    {
+      uid: 'haldi-gaurav-akansha-2026@wedding',
+      start: '20260619T033000Z',
+      end:   '20260619T063000Z',
+      summary: 'Gaurav & Akansha Wedding — Haldi',
+      location: 'Moga Punjabi Tadka\\, Gajraula\\, Amroha District\\, Uttar Pradesh',
+      desc: 'The joyful Haldi ceremony. Traditional attire / old clothes recommended!\\nWebsite: https://gaurav-akansha.netlify.app'
+    },
+    {
+      uid: 'wedding-ceremony-gaurav-akansha-2026@wedding',
+      start: '20260619T143000Z',
+      end:   '20260619T193000Z',
+      summary: 'Gaurav & Akansha — Wedding Ceremony 💍',
+      location: 'Highway Resort\\, NH-9\\, Gajraula\\, Amroha District\\, Uttar Pradesh',
+      desc: 'The main wedding ceremony at the auspicious muhurat. Traditional Indian Attire. Highway Resort\\, NH-9\\, Gajraula — ~110 km from Delhi.\\nWebsite: https://gaurav-akansha.netlify.app'
+    }
+  ];
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Gaurav & Akansha Wedding//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  events.forEach(ev => {
+    lines.push(
+      'BEGIN:VEVENT',
+      'UID:' + ev.uid,
+      'DTSTAMP:' + now,
+      'DTSTART:' + ev.start,
+      'DTEND:' + ev.end,
+      'SUMMARY:' + ev.summary,
+      'LOCATION:' + ev.location,
+      'DESCRIPTION:' + ev.desc,
+      'STATUS:CONFIRMED',
+      'END:VEVENT'
+    );
+  });
+  lines.push('END:VCALENDAR');
+  const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gaurav-akansha-wedding-2026.ics';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 </script>
 
